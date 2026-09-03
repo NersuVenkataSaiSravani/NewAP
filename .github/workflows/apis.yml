@@ -1,0 +1,21 @@
+name: Pipeline
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+
+      - name: Build Image
+        run: docker build -t api-img .
+
+        run: docker run -d -p 5000:5000 --name api api-img
+
+        run: curl http://localhost:5000
+
+        
